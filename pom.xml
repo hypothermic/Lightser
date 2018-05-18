@@ -1,0 +1,101 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>nl.hypothermic</groupId>
+  <artifactId>lightser</artifactId>
+  <version>1.0.0-SNAPSHOT</version>
+  <packaging>jar</packaging>
+  
+  <name>Lightser</name>
+  <description>Lightweight and easy to use serialization engine.</description>
+  <url>https://github.com/hypothermic</url>
+  
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <maven.compiler.source>1.6</maven.compiler.source>
+    <maven.compiler.target>1.6</maven.compiler.target>
+    <github.global.server>github</github.global.server>
+    <github.global.userName>hypothermic</github.global.userName>
+    <github.global.password>${env.githubpass}</github.global.password>
+  </properties>
+  
+  <licenses>
+    <license>
+      <name>MIT License</name>
+      <url>http://www.opensource.org/licenses/mit-license.php</url>
+      <!-- Note: also availible here: "https://github.com/hypothermic/lightser/blob/master/LICENSE.txt", or in the project root. -->
+    </license>
+  </licenses>
+  
+  <issueManagement>
+    <url>https://github.com/hypothermic/lightser/issues</url>
+    <system>GitHub Issues</system>
+  </issueManagement>
+  
+  <scm>
+    <url>https://github.com/hypothermic/lightser</url>
+    <connection>scm:git:git://github.com/hypothermic/lightser.git</connection>
+    <developerConnection>scm:git:git@github.com:hypothermic/lightser.git</developerConnection>
+  </scm>
+  
+  <developers>
+    <developer>
+      <name>hypothermic</name>
+      <email>admin@hypothermic.nl</email>
+      <url>https://www.github.com/hypothermic/</url>
+      <organization>Hypothermic Services</organization>
+      <organizationUrl>https://www.hypothermic.nl</organizationUrl>
+      <roles>
+        <role>Architect</role>
+        <role>Developer</role>
+      </roles>
+      <timezone>Europe/Amsterdam</timezone>
+      <properties>
+        <picUrl>https://www.hypothermic.nl/resources/logo.png</picUrl>
+      </properties>
+    </developer>
+  </developers>
+  
+  <dependencies>
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>4.12</version>
+      <scope>test</scope>
+    </dependency>
+  </dependencies>
+  
+  <build>
+    <plugins>
+      <plugin>
+        <artifactId>maven-deploy-plugin</artifactId>
+        <version>2.8.1</version>
+        <configuration>
+            <altDeploymentRepository>internal.repo::default::file://${project.build.directory}/mvn-repo</altDeploymentRepository>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>com.github.github</groupId>
+        <artifactId>site-maven-plugin</artifactId>
+        <version>0.11</version>
+        <configuration>
+          <message>Maven artifacts for ${project.version}</message>
+          <noJekyll>true</noJekyll>
+          <outputDirectory>${project.build.directory}/mvn-repo</outputDirectory>
+          <branch>refs/heads/mvn-repo</branch>
+          <includes><include>**/*</include></includes>
+          <repositoryName>lightser</repositoryName>
+          <repositoryOwner>hypothermic</repositoryOwner>
+          <merge>true</merge>
+        </configuration>
+        <executions>
+          <execution>
+            <goals>
+              <goal>site</goal>
+            </goals>
+            <phase>deploy</phase>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
+</project>
