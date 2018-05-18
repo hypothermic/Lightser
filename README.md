@@ -16,7 +16,7 @@ Lightser.serialize(object, sample, new SerializeCallback() {
 
 Lightser.deserialize(sample, new DeserializeCallback() {
     public void onDeserializeSuccessful(Serializable ser) {
-        if (Arrays.toString((int[]) ser).equals("[0, 2, 4, 8]")) {
+        if (Arrays.toString((int[]) ser).equals("[0, 3, 6, 9]")) {
             System.out.println("Deserialize success");
         }
     }
@@ -24,4 +24,33 @@ Lightser.deserialize(sample, new DeserializeCallback() {
         x.printStackTrace();
     }
 });
+```
+
+## Maven dependency
+```xml
+<repository>
+  <id>lightser-mvn-repo</id>
+  <url>https://raw.github.com/hypothermic/lightser/mvn-repo/</url>
+</repository>
+
+<dependency>
+  <groupId>nl.hypothermic</groupId>
+  <artifactId>lightser</artifactId>
+  <!-- If you're using Maven3, specify version tag -->
+  <version>LATEST</version>
+</dependency>
+```
+
+## Gradle dependency
+```gradle
+repositories {
+    maven {
+        url "https://raw.github.com/hypothermic/lightser/mvn-repo/"
+    }
+}
+
+dependencies {
+    // Note: use 'api' instead of 'compile' if you're using Android Studio.
+    compile group: 'nl.hypothermic', name: 'lightser', version: '1.0.0-RELEASE'
+}
 ```
